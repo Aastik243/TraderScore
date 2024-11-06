@@ -23,12 +23,15 @@ To configure the backend environment variables, create a `.env` file in the root
 REDIS_HOST=""     # Set the host address for your Redis server (e.g., localhost)
 REDIS_PORT=""     # Set the port for your Redis server (e.g., 6379)
 PORT=""           # Set the port on which the backend application server will run (e.g., 5000)
+```
 
 To configure the frontend environment variables, create a .env file in frontend/trader-score folder with the following values:
 
+```plaintext
 # .env (Frontend)
 
 REACT_APP_BACKEND_BASE_URL=http://localhost:5000   # Replace with your backend server URL if different
+```
 
 ## How to Run
 
