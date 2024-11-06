@@ -29,11 +29,20 @@ Navigate to project and install the dependecies.
 cd TraderScore
 npm install
 ```
-Start the backend server
+
+### 3. Set Up Redis
+
+If you don’t have Redis installed, you can download it here or install it via Docker:
+```bash
+docker run --name redis -p 6379:6379 -d redis
+```
+This will set up Redis on localhost at port 6379, which is Redis’s default.
+
+Start the backend server.
 ```bash
 npm start
 ```
-### 3. Frontend setup
+### 4. Frontend setup
 
 Navigate to frontend directory and install the dependencies.
 ```bash
@@ -46,7 +55,7 @@ Start the frontend server.
 npm start
 ```
 
-### 4. Open the Application
+### 5. Open the Application
 Once both the backend and frontend are running, open your browser and navigate to http://localhost:3000 to view the TraderScore leaderboard.
 
 
