@@ -1,29 +1,41 @@
 import { getTop10Traders } from './leaderboard.js';
 import { simulateTradeStream } from './tradeProcessor.js';
-import cron from "node-cron";
+import express from 'express';
+import dotenv from 'dotenv';
+import Redis from 'ioredis';
+import cron from 'node-cron';
+import cors from "cors";
 
-const symbols = ["BTC", "ETH", "USDT", "ARB", "DAI", "MATIC"]; // Array of verified symbols
 
-// Simulate incoming trades
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+const symbols = ["BTC", "ETH", "USDT", "ARB", "DAI", "MATIC"]; 
+const redis = new Redis(); // Connect to your Redis instance
+app.use(cors());
+
+
 simulateTradeStream();
 
-// Function to display all leaderboards
-const displayAllLeaderboards = async () => {
-    for (const symbol of symbols) {
-        try {
+// API Endpoint to get leaderboards for all symbols
+app.get('/leaderboards', async (req, res) => {
+    try {
+        const leaderboards = {};
+
+        for (const symbol of symbols) {
             const topTraders = await getTop10Traders(symbol);
-            console.log(`Top 10 Traders by Volume for ${symbol}:`);
-            topTraders.forEach((trader) => {
-                console.log(`${trader.rank}. Trader ${trader.traderId} - ${trader.volume} units`);
-            });
-        } catch (error) {
-            console.error(`Error fetching top traders for ${symbol}:`, error);
+            leaderboards[symbol] = topTraders;
         }
+
+        res.status(200).json(leaderboards);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching leaderboards' });
     }
-};
+});
 
-// Run the leaderboard display immediately on start
-displayAllLeaderboards();
 
-// Schedule leaderboard updates to run every minute
-cron.schedule('* * * * *', displayAllLeaderboards);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
