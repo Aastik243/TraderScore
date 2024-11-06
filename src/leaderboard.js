@@ -20,7 +20,10 @@ const symbols = ["BTC", "ETH", "USDT", "ARB", "DAI", "MATIC"] // array of verifi
 
 export const processTrade = async (traderId, volume, symbol) => {
     if (!symbols.includes(symbol)) {
-        throw new Error(`Invalid symbol: ${symbol}`);
+        return;
+    }
+    if(traderId==''){
+        return;
     }
     const LEADERBOARD_KEY = `leaderboard:${symbol}`;
     await redis.zincrby(LEADERBOARD_KEY, volume, traderId);

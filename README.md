@@ -32,7 +32,7 @@ npm install
 
 ### 3. Set Up Redis
 
-If you don’t have Redis installed, you can download it here or install it via Docker:
+If you don’t have Redis installed, you can install it via Docker:
 ```bash
 docker run --name redis -p 6379:6379 -d redis
 ```
@@ -57,6 +57,20 @@ npm start
 
 ### 5. Open the Application
 Once both the backend and frontend are running, open your browser and navigate to http://localhost:3000 to view the TraderScore leaderboard.
+
+## Testing
+To run tests for TraderScore:
+
+1. Install Jest: Make sure Jest is installed by running:
+```bash
+npm install --save-dev jest
+```
+2. Navigate to TraderScore folder.
+3. Run Tests: Execute the following command to run your tests:
+```bash
+npm test
+```
+This will run all the test suites and display the results in the console.
 
 
 

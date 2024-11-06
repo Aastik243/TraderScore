@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';  // Import the CSS file
+import './App.css';  
 
 const App = () => {
   const [leaderboards, setLeaderboards] = useState({});
   const [loading, setLoading] = useState(true);
-  const [selectedSymbol, setSelectedSymbol] = useState("BTC"); // Default symbol
+  const [selectedSymbol, setSelectedSymbol] = useState("BTC"); 
 
   const symbols = ["BTC", "ETH", "USDT", "ARB", "DAI", "MATIC"];
 
-  // Function to fetch leaderboard data for the selected symbol
+  
   const fetchLeaderboards = async () => {
     try {
       setLoading(true);
       const response = await fetch(`http://localhost:5000/leaderboards`);
       const data = await response.json();
-      setLeaderboards(data); // Set the leaderboard data
+      setLeaderboards(data); 
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
     } finally {
@@ -22,11 +22,11 @@ const App = () => {
     }
   };
 
-  // Fetch leaderboard data on component mount and when the selected symbol changes
+
   useEffect(() => {
     fetchLeaderboards();
     const interval = setInterval(fetchLeaderboards, 60000); // Fetch every minute
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => clearInterval(interval); 
   }, [selectedSymbol]);
 
   return (
