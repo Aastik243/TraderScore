@@ -12,7 +12,7 @@ const App = () => {
   const fetchLeaderboards = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/leaderboards`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/leaderboards`);
       const data = await response.json();
       setLeaderboards(data); 
     } catch (error) {
@@ -21,7 +21,18 @@ const App = () => {
       setLoading(false);
     }
   };
-
+  const formatDate = (timestamp) => {
+    if (!timestamp) return 'N/A';
+    const date = new Date(timestamp);
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }).format(date);
+  };
 
   useEffect(() => {
     fetchLeaderboards();
@@ -30,7 +41,7 @@ const App = () => {
   }, [selectedSymbol]);
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+    <div className="container">
       <h1>Trading Leaderboard</h1>
 
       {/* Symbol Selector */}
@@ -61,6 +72,7 @@ const App = () => {
                   <th>Rank</th>
                   <th>Name</th>
                   <th>Volume Traded</th>
+                  <th>Timestamp</th>
                 </tr>
               </thead>
               <tbody>
@@ -69,6 +81,7 @@ const App = () => {
                     <td>{trader.rank}</td>
                     <td>{trader.traderId}</td>
                     <td>{trader.volume} {selectedSymbol}</td>
+                    <td>{formatDate(parseInt(trader.timestamp))}</td>
                   </tr>
                 ))}
               </tbody>

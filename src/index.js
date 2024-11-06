@@ -3,7 +3,6 @@ import { simulateTradeStream } from './tradeProcessor.js';
 import express from 'express';
 import dotenv from 'dotenv';
 import Redis from 'ioredis';
-import cron from 'node-cron';
 import cors from "cors";
 
 

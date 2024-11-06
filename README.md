@@ -10,6 +10,26 @@ TraderScore is a real-time leaderboard application that displays the top traders
 - Real-time data fetched from a backend server using Redis
 - User-friendly UI built with React
 
+
+## Environment Configuration
+
+### Backend Environment Variables
+
+To configure the backend environment variables, create a `.env` file in the root directory of the backend project with the following values:
+
+```plaintext
+# .env (Backend)
+
+REDIS_HOST=""     # Set the host address for your Redis server (e.g., localhost)
+REDIS_PORT=""     # Set the port for your Redis server (e.g., 6379)
+PORT=""           # Set the port on which the backend application server will run (e.g., 5000)
+
+To configure the frontend environment variables, create a .env file in frontend/trader-score folder with the following values:
+
+# .env (Frontend)
+
+REACT_APP_BACKEND_BASE_URL=http://localhost:5000   # Replace with your backend server URL if different
+
 ## How to Run
 
 Follow these steps to run the application locally:

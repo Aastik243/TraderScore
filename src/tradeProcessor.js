@@ -8,7 +8,8 @@ export const simulateTradeStream = () => {
         const traderId = sampleTraders[Math.floor(Math.random() * sampleTraders.length)];
         const volume = Math.floor(Math.random() * 100) + 1; // Random volume between 1 and 100
         const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-        processTrade(traderId, volume, symbol);
+        const timestamp = Date.now();
+        processTrade(traderId, volume, symbol,timestamp);
     }, 1000); // Simulating a trade every second
 }
 
